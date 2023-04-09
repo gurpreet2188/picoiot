@@ -23,7 +23,7 @@ function Graph({ width, height, dataList, dataType }) {
                  <text x={width / 2} y={height / 2} dominantBaseline={'middle'} textAnchor="middle" style={{ fill: '#fff', opacity: 0.2, fontSize: "2.5rem" }}>{dataType}</text>
 
                 <text x='10' y={20} style={{ fill: '#fff', opacity: 0.6 }}>{maxVal !== 0 ? maxVal : 200}</text>
-                <text x='10' style={{ fill: '#fff', opacity: 0.6 }} y={height / 2}>{maxVal !== 0 ? (minVal + maxVal) / 2 : 100}</text>
+                <text x='10' style={{ fill: '#fff', opacity: 0.6 }} y={height / 2}>{maxVal !== 0 ? Number.parseInt((minVal + maxVal) / 2) : 100}</text>
                 <text x='10' style={{ fill: '#fff' , opacity: 0.6}} y={height - 10}>{minVal}</text>
             </svg>
         </div>
