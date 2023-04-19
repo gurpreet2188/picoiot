@@ -67,8 +67,8 @@ function Body() {
   }
 
   return (
-    <div className='flex flex-col gap-4 items-center justify-center h-[100%] w-screen md:w-[90%] md:flex-row md:flex-wrap' ref={bodyRef}>
-      <div className='flex flex-row gap-[1.2rem] self-end pr-8'>
+    <div className='flex flex-col gap-4 items-center justify-center h-[100%] w-screen md:w-[90%]' ref={bodyRef}>
+      <div className='flex flex-row gap-[1.2rem] self-end pr-8 md:pr-12'>
         <p>Time Range (hr)</p>
         {[1,2,4,8].map(v => {
           return (<>
@@ -77,7 +77,7 @@ function Body() {
         })}
       </div>
      {temperature ? 
-     <>
+     <div className='flex gap-4 items-center justify-center md:flex-row md:flex-wrap'>
       
       <Graph width={screenWidth >500 ? 420:  screenWidth - 60} height={200} dataList={temperature ? temperature : [1,2]} dataType={"Temperature"} loading={loading}/> 
      
@@ -86,7 +86,7 @@ function Body() {
        <Graph width={screenWidth >500 ? 420:  screenWidth - 60} height={200} dataList={eCO2 ? eCO2 : [1,2]} dataType={"eCO2"} loading={loading}/> 
       
        <Graph width={screenWidth >500 ? 420:  screenWidth - 60} height={200} dataList={tvoc ? tvoc : [1,2]} dataType={"TVOC"} loading={loading}/>
-     </> :
+     </div> :
       <>
         <p className='text-2xl'>
           Loading Telemetry Data from 
