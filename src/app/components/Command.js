@@ -29,7 +29,7 @@ function Command() {
     const inputStyles = 'h-[3rem] bg-transparent text-black placeholder-black/50 border border-black/10 p-2'
 
     return (
-        <div className='backdrop-blur-none bg-white/25 flex flex-col gap-4 text-black/70 p-4 rounded-md shadow-lg w-[90%] md:w-[81%]'>
+        <div className='backdrop-blur-none bg-white/25 flex flex-col gap-4 text-black/70 p-4 rounded-md shadow-lg w-[90%] md:w-[800px]'>
             <p className='text-xlg font-bold'>Send Command to Pico W</p>
             <form onSubmit={handleSubmit} className='flex flex-col gap-4 ' ref={formRef}>
                 <input type='password' placeholder='Enter Command password' onChange={(e) => { setPass(e.target.value) }} className={inputStyles} />

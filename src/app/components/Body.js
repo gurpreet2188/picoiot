@@ -5,7 +5,7 @@ import Graph from './Graph'
 
 function Body() {
   const bodyRef = useRef(null)
-  const [timeRange, setTimeRange] = useState("PT1H")
+  const [timeRange, setTimeRange] = useState("PT8H")
   const [screenWidth ,setScreenWidth] = useState(0)
   const [temperature, setTemperature] = useState()
   const [humidity, setHumidity] = useState()
@@ -13,12 +13,13 @@ function Body() {
   const [tvoc, setTVOC] = useState()
   const [loading, setLoading] = useState(false)
 
-
+  const dataTypes = ["Temperature", "Humidity", "eCO2", "TVOC"]
+  const valueTypes = [temperature, humidity, eCO2, tvoc]
   useEffect(() => {
     let check = true
 
     const query = {
-      "cols": ["Temperature", "Humidity", "eCO2", "TVOC"],
+      "cols": dataTypes,
       "time": timeRange
     }
     if (check) {
@@ -37,8 +38,8 @@ function Body() {
        if(resData.results) {
         setTemperature(resData.results.map(v => v.Temperature))
         setHumidity(resData.results.map(v => v.Humidity))
-        seteCO2(resData.results.map(v => v['eCO2'] === 400 ? 0 : v['eCO2']))
-        setTVOC(resData.results.map(v => v['TVOC']))
+        seteCO2(resData.results.map(v => v[dataTypes[2]] === 400 ? 0 : v[dataTypes[2]]))
+        setTVOC(resData.results.map(v => v[dataTypes[3]]))
        } 
       
       }
@@ -57,6 +58,7 @@ function Body() {
 
       if (check && bodyRef.current){
         setScreenWidth(bodyRef.current.clientWidth)
+        
       }
 
       return () => check = false
@@ -66,36 +68,28 @@ function Body() {
       setTimeRange(`PT${v}H`)
   }
 
+  console.log("test",screenWidth)
+
   return (
     <div className='flex flex-col gap-4 items-center justify-center h-[100%] w-screen md:w-[90%]' ref={bodyRef}>
       <div className='flex flex-row gap-[1.2rem] self-end pr-8 md:pr-12'>
         <p>Time Range (hr)</p>
-        {[1,2,4,8].map(v => {
+        {[1,2,4,8].map((v,i) => {
           return (<>
-            <button className='bg-transparent' style={{opacity: timeRange === `PT${v}H` ? 0.7: 0.4}} onClick={()=>{timeRangeBtn(v)}}>{v}</button>
+            <button key={i+v} className='bg-transparent' style={{opacity: timeRange === `PT${v}H` ? 0.7: 0.4}} onClick={()=>{timeRangeBtn(v)}}>{v}</button>
           </>)
         })}
-      </div>
-     {temperature ? 
-     <div className='flex gap-4 items-center justify-center md:flex-row md:flex-wrap'>
+      </div> 
+     <div className='flex flex-col gap-4 items-center justify-center md:flex-row md:flex-wrap md:w-[100%] w-screen'>
+
+      {temperature ? dataTypes.map((v,i) =>{
+      return (<>
+      <Graph key={i} width={screenWidth > 400 ? 400: screenWidth - 60} height={200} dataList={valueTypes[i]} dataType={v} loading={loading}/> 
+      </>)
+
+      }): "Loading....."}
       
-      <Graph width={screenWidth >500 ? 420:  screenWidth - 60} height={200} dataList={temperature ? temperature : [1,2]} dataType={"Temperature"} loading={loading}/> 
-     
-      <Graph width={screenWidth >500 ? 420:  screenWidth - 60} height={200} dataList={humidity ? humidity : [1,2]} dataType={"Humidity"} loading={loading}/> 
-     
-       <Graph width={screenWidth >500 ? 420:  screenWidth - 60} height={200} dataList={eCO2 ? eCO2 : [1,2]} dataType={"eCO2"} loading={loading}/> 
-      
-       <Graph width={screenWidth >500 ? 420:  screenWidth - 60} height={200} dataList={tvoc ? tvoc : [1,2]} dataType={"TVOC"} loading={loading}/>
-     </div> :
-      <>
-        <p className='text-2xl'>
-          Loading Telemetry Data from 
-        </p>
-        <p className='text-2xl'>
-          Azure IoT Central
-        </p>
-      </>
-    }
+     </div>
     </div>
   )
 }
