@@ -1,4 +1,4 @@
-function Graph({ width, height, dataList, dataType }) {
+function Graph({ width, height, dataList, dataType, loading}) {
     const offset = 20
     width -= offset
     height -= offset
@@ -10,21 +10,21 @@ function Graph({ width, height, dataList, dataType }) {
 
     
     return (
-        <div className={`bg-slate-700 rounded-md p-[20px] shadow-md`}>
+        <div className={`backdrop-blur-none bg-white/25 rounded-md p-[20px] shadow-md`}>
             <svg width={width} height={height} >
 
                 <polyline
                     fill="none"
-                    stroke="#ffffff"
+                    stroke="#000"
                     strokeWidth="3"
-                    opacity={0.4}
+                    opacity={loading ? 0 : 0.2}
                     points={`${xyAxis}`} />
+                 <text x={ width / 2 } y={height / 2} dominantBaseline={'middle'} textAnchor="middle" style={{ fill: '#000', opacity: loading ? 0.5 : 0, fontSize: "2rem" }}>Loading...</text>
+                 <text x={ width -50 } y={10} dominantBaseline={'middle'} textAnchor="middle" style={{ fill: '#000', opacity: 0.5, fontSize: "1rem" }}>{dataType}</text>
 
-                 <text x={width / 2} y={height / 2} dominantBaseline={'middle'} textAnchor="middle" style={{ fill: '#fff', opacity: 0.2, fontSize: "2.5rem" }}>{dataType}</text>
-
-                <text x='10' y={20} style={{ fill: '#fff', opacity: 0.6 }}>{maxVal !== 0 ? maxVal : 200}</text>
-                <text x='10' style={{ fill: '#fff', opacity: 0.6 }} y={height / 2}>{maxVal !== 0 ? Number.parseInt((minVal + maxVal) / 2) : 100}</text>
-                <text x='10' style={{ fill: '#fff' , opacity: 0.6}} y={height - 10}>{minVal}</text>
+                <text x='10' y={20} style={{ fill: '#000', opacity: 0.6 }}>{dataType === 'Temperature' ? maxVal * (1 + 0.1).toFixed(2) : parseInt(maxVal * (1 + 0.1))}</text>
+                <text x='10' style={{ fill: '#000', opacity: 0.6 }} y={height / 2}>{dataType === 'Temperature' ? ((maxVal + minVal) / 2 ).toFixed(2): parseInt((maxVal +( dataType === 'eCO2' ? 400 : minVal)) / 2)}</text>
+                <text x='10' style={{ fill: '#000' , opacity: 0.6}} y={height - 10}>{dataType === 'Temperature' ? (minVal  * (1 - 0.1)).toFixed(2) : parseInt(dataType === 'eCO2' ? 400 : minVal  * (1 - 0.1))}</text>
             </svg>
         </div>
     )

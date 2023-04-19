@@ -6,7 +6,7 @@ import './globals.css'
 
 export default function Home() {
   return (
-    <div className="flex flex-col gap-8 items-center justify-center bg-slate-300 h-[100%] md:w-[50%] md:p-8">
+    <div className="flex flex-col gap-8 md:gap-[5rem] items-center justify-center pt-8 bg-gradient-to-b from-green-100 to-blue-100 h-[100%] md:w-[70%] md:p-8">
       <Header/>
       <Body/>
       <Command/>

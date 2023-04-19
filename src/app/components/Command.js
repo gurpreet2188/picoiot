@@ -26,15 +26,15 @@ function Command() {
         formRef.current.reset()
     }
 
-    const inputStyles = 'h-[3rem] bg-transparent text-white placeholder-white border border-white/10 p-2'
+    const inputStyles = 'h-[3rem] bg-transparent text-black placeholder-black/50 border border-black/10 p-2'
 
     return (
-        <div className='bg-slate-700 flex flex-col gap-4 text-white p-4 rounded-md shadow-lg w-[90%]'>
+        <div className='backdrop-blur-none bg-white/25 flex flex-col gap-4 text-black/70 p-4 rounded-md shadow-lg w-[90%] md:w-[81%]'>
             <p className='text-xlg font-bold'>Send Command to Pico W</p>
             <form onSubmit={handleSubmit} className='flex flex-col gap-4 ' ref={formRef}>
                 <input type='password' placeholder='Enter Command password' onChange={(e) => { setPass(e.target.value) }} className={inputStyles} />
                 <input type='text' placeholder='Enter One or Two Word Message' onChange={(e) => { setMsg(e.target.value) }} className={inputStyles} />
-                <button type='submit' className='p-2 bg-slate-300 text-black'>Submit</button>
+                <button type='submit' className='p-2 bg-slate-300 text-black md:w-[14%] rounded-md'>Submit</button>
             </form>
             <p>{res ? res.msg === 'failed' ? "Failed" : "Message Sent" : ""}</p>
         </div>
