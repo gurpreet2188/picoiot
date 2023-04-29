@@ -1,4 +1,4 @@
-function Graph({ width, height, dataList, dataType, loading}) {
+function Graph({ width, height, dataList, dataType, loading, uKey}) {
     const offset = 20
     width -= offset
     height -= offset
@@ -10,7 +10,7 @@ function Graph({ width, height, dataList, dataType, loading}) {
 
     
     return (
-        <div className={`backdrop-blur-none bg-white/25 rounded-md p-[20px] shadow-md`}>
+        <div key={uKey} className={`backdrop-blur-none bg-white/25 rounded-md p-[20px] shadow-md`}>
             <svg width={width} height={height} >
 
                 <polyline

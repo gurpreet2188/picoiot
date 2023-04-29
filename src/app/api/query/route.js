@@ -13,6 +13,5 @@ export async function POST(request) {
         body: JSON.stringify(query)
     })
     const data = await f.json()
-    
     return new Response(JSON.stringify(data))
 }
