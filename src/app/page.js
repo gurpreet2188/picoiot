@@ -5,7 +5,7 @@ import './globals.css'
 
 export default function Home() {
   return (
-    <div className="flex flex-col gap-8 md:gap-[5rem] items-center justify-center pt-8 bg-gradient-to-b from-green-100 to-blue-100 h-[100%] md:w-[70%] md:p-8">
+    <div className="flex flex-col gap-8 md:gap-[5rem] items-center justify-center relative bg-gradient-to-b from-cyan-100 via-violet-200 to-blue-200 dark:from-fuchsia-900 dark:via-blue-800 dark:to-violet-900 dark:text-white h-[100%] md:w-[70%] md:px-8">
       <Header/>
       <Body/>
       <Footer/>
