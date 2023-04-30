@@ -117,15 +117,15 @@ function Body() {
           <p>Time Range (hr)</p>
           {[1, 2, 4, 8].map((v, i) => {
             return (
-              <button key={i + "b"} className='bg-transparent' style={{ opacity: timeRange === `PT${v}H` ? 0.7 : 0.4 }} onClick={() => { timeRangeBtn(v) }}>{v}</button>)
+              <button key={i + "b"} className={`bg-transparent ${timeRange === `PT${v}H` ? 'text-gray-900 dark:text-gray-200' : 'text-gray-500 dark:text-gray-500'}`} onClick={() => { timeRangeBtn(v) }}>{v}</button>)
           })}
         </div>
         <div className='flex flex-col gap-4 items-center justify-center md:flex-row md:flex-wrap md:w-[100%] w-screen'>
 
           {temperature ? dataTypes.map((v, i) => {
-            return (<>
-              <Graph ukey={i + "g"} width={screenWidth > 400 ? 400 : screenWidth - 60} height={200} dataList={valueTypes[i]} dataType={v} />
-            </>)
+            return (
+              <Graph key={i + "g"} width={screenWidth > 400 ? 400 : screenWidth - 60} height={200} dataList={valueTypes[i]} dataType={v} />
+           )
 
           }) : "Loading....."}
 
