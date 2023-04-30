@@ -117,7 +117,7 @@ function Body() {
           <p>Time Range (hr)</p>
           {[1, 2, 4, 8].map((v, i) => {
             return (
-              <button key={i + "b"} className={`bg-transparent ${timeRange === `PT${v}H` ? 'text-gray-900 dark:text-gray-200' : 'text-gray-500 dark:text-gray-500'}`} onClick={() => { timeRangeBtn(v) }}>{v}</button>)
+              <button key={i + "b"} className={`bg-transparent ${timeRange === `PT${v}H` ? 'text-gray-900 dark:text-gray-200' : 'text-gray-400 dark:text-gray-500'}`} onClick={() => { timeRangeBtn(v) }}>{v}</button>)
           })}
         </div>
         <div className='flex flex-col gap-4 items-center justify-center md:flex-row md:flex-wrap md:w-[100%] w-screen'>
